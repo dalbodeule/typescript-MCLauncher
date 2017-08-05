@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/small-sunshines/nodejs-minecraft-launcher#readme",
   "dependencies": {
+    "async-each": "^1.0.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1"
   }
