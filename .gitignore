@@ -62,3 +62,9 @@ typings/
 
 # app.zip
 app.zip
+
+# nwjs cache
+cache
+
+$# nwjs build
+build

@@ -6,20 +6,91 @@
 
         <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
         <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="./node_modules/sweetalert/dist/sweetalert.css">
+        <style>
+            [v-clock] {
+                display: none;
+            }
+            html, body {
+                height: 100%;
+                overflow: hidden;
+                width: 100%;
+                background-color: #99ccff;
+            }
+            #app {
+                margin-top: 52px;
+                margin-left: 25px;
+                margin-right: 25px;
+            }
+        </style>
     </head>
 
     <body>
-        <section class="section">
-            <div class="container">
-                <h1 class="title">
-                    Hello World!
-                </h1>
-                <p class="subtitle">
-                    My first website with <strong>Bulma</strong>!
-                </p>
+        <header id="header" v-clock>
+            <nav class="navbar">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="#">
+                        TEST
+                    </a>
+                    <div class="navbar-burger burger" v-on:click="showNav = !showNav" v-bind:class="{ 'is-active' : showNav }">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <div id="navMenu" class="navbar-menu" v-bind:class="{ 'is-active' : showNav }">
+                    <div class="navbar-start">
+                        <a class="navbar-item" href="#">
+                            Test
+                        </a>
+                    </div>
+                    <div class="navbar-end">
+                        <a class="navbar-item" href="#">
+                            Test
+                        </a>
+                    </div>
+                </div>
+            </nav>           
+        </header>
+        <div id="app" v-clock>
+            <div v-if="viewpage == 'login'">
+                <div class="tile is-ancestor">
+                    <div class="tile notification is-info">
+                        <form @submit.prevent="loginSubmit">
+                            <div class="field">
+                                <label class="label">Username</label>
+                                <div class="control">
+                                    <input class="input" type="text" placeholder="Text input" v-model="username" v-bind:class="{'is-success': username_isvalid, 'is-danger': username_isunvalid}">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Password</label>
+                                <div class="control">
+                                    <input class="input" type="password" placeholder="Password input" v-model="password" v-bind:class="{'is-success': password_isvalid, 'is-danger': password_isunvalid}">
+                                </div>
+                            </div>
+                            <div class="field is-grouped">
+                                <div class="control">
+                                    <input class="button is-primary" type="submit" value="로그인" />
+                                </div>
+                                <div class="control">
+                                    <input type="reset" class="button is-warning" value="초기화"/>
+                                </div>
+                            </div>
+                        <form>
+                    </div>
+                </div>
             </div>
-        </section>
+            <div v-else-if="viewpage == 'launcher'">
+                launcher
+            </div>
+        </div>
         <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
         <script src="./node_modules/vue/dist/vue.min.js"></script>
+        <script src="./node_modules/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="./src/js/index.js"></script>
+        <script>
+            require('nw.gui').Window.get().showDevTools()
+        </script>
     </body>
 </html>

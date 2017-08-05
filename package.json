@@ -10,7 +10,7 @@
     "resizable": true
   },
   "scripts": {
-    "test": "del app.zip && \"C:\\Program files\\7-zip\\7z.exe\" a %cd%\\app.zip %cd%\\* && C:\\nwjs\\nw.exe %cd%\\app.zip"
+    "test": "node nwbuild.js && .\\build\\nodejs-minecraft-launcher\\win64\\nodejs-minecraft-launcher.exe"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,10 @@
     "jquery": "^3.2.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
+    "sweetalert": "^1.1.3",
     "vue": "^2.4.2"
+  },
+  "devDependencies": {
+    "nw-builder": "^3.4.1"
   }
 }
