@@ -30,7 +30,7 @@
             <nav class="navbar">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="#">
-                        TEST
+                        node mclauncher
                     </a>
                     <div class="navbar-burger burger" v-on:click="showNav = !showNav" v-bind:class="{ 'is-active' : showNav }">
                         <span></span>
@@ -57,16 +57,16 @@
                 <div class="tile is-ancestor">
                     <div class="tile notification is-info">
                         <form @submit.prevent="loginSubmit">
-                            <div class="field">
-                                <label class="label">Username</label>
+                            <div class="field" style="width: 150%">
+                                <label class="label">E-Mail or Username</label>
                                 <div class="control">
-                                    <input class="input" type="text" placeholder="Text input" v-model="username" v-bind:class="{'is-success': username_isvalid, 'is-danger': username_isunvalid}">
+                                    <input class="input" type="text" placeholder="E-Mail or Username here" v-model="username" v-bind:class="{'is-success': username_isvalid, 'is-danger': username_isunvalid}">
                                 </div>
                             </div>
-                            <div class="field">
+                            <div class="field" style="width: 150%">
                                 <label class="label">Password</label>
                                 <div class="control">
-                                    <input class="input" type="password" placeholder="Password input" v-model="password" v-bind:class="{'is-success': password_isvalid, 'is-danger': password_isunvalid}">
+                                    <input class="input" type="password" placeholder="Password here" v-model="password" v-bind:class="{'is-success': password_isvalid, 'is-danger': password_isunvalid}">
                                 </div>
                             </div>
                             <div class="field is-grouped">
@@ -89,8 +89,10 @@
         <script src="./node_modules/vue/dist/vue.min.js"></script>
         <script src="./node_modules/sweetalert/dist/sweetalert.min.js"></script>
         <script src="./src/js/index.js"></script>
-        <script>
-            require('nw.gui').Window.get().showDevTools()
+        <script type="text/javascript">
+            $(document).ready(() => {
+                require('nw.gui').Window.get().showDevTools();
+            });
         </script>
     </body>
 </html>

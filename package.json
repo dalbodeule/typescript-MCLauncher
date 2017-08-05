@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-minecraft-launcher",
+  "name": "node-mclauncher",
   "version": "1.0.0",
   "description": "Node.js로 마인크래프트 런쳐를 구현해봅니다",
   "main": "index.html",
@@ -10,7 +10,7 @@
     "resizable": true
   },
   "scripts": {
-    "test": "node nwbuild.js && .\\build\\nodejs-minecraft-launcher\\win64\\nodejs-minecraft-launcher.exe"
+    "test": "node nwbuild.js && .\\build\\node-mclauncher\\win64\\node-mclauncher.exe"
   },
   "repository": {
     "type": "git",

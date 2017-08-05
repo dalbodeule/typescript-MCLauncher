@@ -1,6 +1,6 @@
 "use strict";
 
-const login = require('./lib/login.js');
+const login = require('./lib/login.js'), configClass = require('./lib/config.js');
 
 let header = new Vue({
     el: '#header',
@@ -30,8 +30,19 @@ let main = new Vue({
                     try {
                         let request = new login(main.username, main.password);
                         let response = await request.run();
-                        console.log(response);
+                        console.log(response.selectedProfile);
+                        await global.config.init();
+                        swal({
+                            title: "Success!",
+                            text: "로그인에 성공했습니다.",
+                            type: "success"
+                        });
+                        let temp = global.config.setUser(response.accessToken, response.clientToken,
+                            main.username, response.selectedProfile.id,
+                            response.selectedProfile.name);
+                        await global.config.save();
                     } catch(e) {
+                        console.log(e);
                         if(typeof e.error == 'string') {
                             switch(e.error) {
                                 case "Method Not Allowed":
@@ -57,6 +68,12 @@ let main = new Vue({
                                         type: "error"
                                     });
                                     break;
+                                default:
+                                    swal({
+                                        title: "Error!",
+                                        text: "무언가 에러가 일어났습니다.",
+                                        type: "error"
+                                    });
                             }
                         }
                     }
@@ -75,4 +92,56 @@ let main = new Vue({
             }
         }
     }
+});
+async function startLogin() {
+    try {
+        global.config = new configClass();
+        await global.config.init();
+        let request = new login(global.config.user.username, '', global.config.user.clientToken);
+        let response = await request.valid(global.config.user.accessToken);
+        swal({
+            title: "Success!",
+            text: "로그인에 성공했습니다.",
+            type: "success"
+        });
+    } catch(e) {
+        console.log(e);
+        if(typeof e.error == 'string') {
+            switch(e.error) {
+                case "Method Not Allowed":
+                case "Not Found":
+                case "Unsupported Media type":
+                    swal({
+                        title: "Error!",
+                        text: "잘못된 요청입니다.",
+                        type: "error"
+                    });
+                    break;
+                
+                case "IllegalArgumentException":
+                case "ForbiddenOperationException":
+                    if(e.cause == "UserMigratedException") swal({
+                        title: "Error!",
+                        text: "이메일을 입력해주세요.",
+                        type: "error"
+                    });
+                    else swal({
+                        title: "Error!",
+                        text: "잘못된 정보입니다. 다시 시도해주세요.",
+                        type: "error"
+                    });
+                    break;
+                default:
+                    swal({
+                        title: "Error!",
+                        text: "무언가 에러가 일어났습니다.",
+                        type: "error"
+                    });
+            }
+        }
+    }
+}
+
+$(document).ready(() => {
+    startLogin();
 });
