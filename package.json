@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-minecraft-launcher",
+  "version": "1.0.0",
+  "description": "Node.js로 마인크래프트 런쳐를 구현해봅니다",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/small-sunshines/nodejs-minecraft-launcher.git"
+  },
+  "author": "small_sunshine",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/small-sunshines/nodejs-minecraft-launcher/issues"
+  },
+  "homepage": "https://github.com/small-sunshines/nodejs-minecraft-launcher#readme",
+  "dependencies": {
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
+  }
+}
